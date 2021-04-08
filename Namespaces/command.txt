@@ -1,5 +1,29 @@
 unshare
+=======
+
+"unshare" can be used to create process in a new namespace.
+unshare -<ns-identity-char> program args
+
+To persist the created namespace even after program exits, use below "--<ns-name>" option. 
+unshare --<ns-name>=<file-system-path> program args
+
+This <file-system-path> can then be used by "nsenter" to execute procs in this namespace.
+
+Persistent namespaces:
+======================
+
+By default, namespaces created with 'unshare' are deleted as soon as the process exits. To persist the namespace, use bind mount as below.
+mount --bind /proc/<pid>/ns/<ns-name> <file-system-file>
+
+Later, this mount point can be used by nsenter to execute processes in that namespace using below command:
+
+nsenter --<ns-name>=<mounted-file-system-file> program args
+
+To delete this namespace, use "umount <mounted-file-system-file>"
+
 nsenter
+=======
+
 ip netns
 ps -ef -o pidns,pid,args
 lsns -t pid
