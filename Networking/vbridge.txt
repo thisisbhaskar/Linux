@@ -1,6 +1,15 @@
 
 brctl
 =====
+brctl is used to create, maintain virtual ethernet bridge in linux.
+Each bridge has a number of ports attached to it. Traffic coming on any of these ports will be forwared to the other ports.
+
+brctl addbr
+brctl delbr
+brctl show
+brctl show <brname>
+brctl addif <brname> <ifname>
+brctl dellif <brname> <ifname>
 
 ip link
 =======
