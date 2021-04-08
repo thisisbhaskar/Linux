@@ -24,7 +24,6 @@ To delete this namespace, use "umount <mounted-file-system-file>"
 nsenter
 =======
 
-ip netns
 ps -ef -o pidns,pid,args
 lsns -t pid
 setns()
