@@ -1,4 +1,4 @@
 ip netns
 ========
 
-Can be used to create network namespaces. Name spaces created with "ip netns" are stored in /var/run/netns
+Can be used to create/delete persistent network namespaces. Name spaces created with "ip netns" are stored in /var/run/netns
