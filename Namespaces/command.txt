@@ -24,6 +24,11 @@ To delete this namespace, use "umount <mounted-file-system-file>"
 nsenter
 =======
 
+Used to run programs in a given namespace.
+https://man7.org/linux/man-pages/man1/nsenter.1.html
+
+nsenter -<namespace-char>/--<ns-name>=<mounted-file-system-file> program args
+
 ps -ef -o pidns,pid,args
 lsns -t pid
 setns()
