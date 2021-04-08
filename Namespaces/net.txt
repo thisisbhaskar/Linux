@@ -1,4 +1,7 @@
 ip netns
 ========
+Along with other standard ways of creating network namspace (clone, unshare), presistent network namespaces can be created with "ip netns"
+"ip netns" can be used to create/delete persistent network namespaces.
+Name spaces created with "ip netns" are stored in /var/run/netns
 
-Can be used to create/delete persistent network namespaces. Name spaces created with "ip netns" are stored in /var/run/netns
+"nsenter" can be used to execute processes in these namespaces with "nsenter --net=</var/run/netns/<name>> program args
