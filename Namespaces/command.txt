@@ -28,6 +28,8 @@ Used to run programs in a given namespace.
 https://man7.org/linux/man-pages/man1/nsenter.1.html
 
 nsenter -<namespace-char>/--<ns-name>=<mounted-file-system-file> program args
+<namespace-char> = m, u, i, n, p, C, U
+<ns-name> = mount, uts, ipc, net, pid, cgroup, user
 
 ps -ef -o pidns,pid,args
 lsns -t pid
