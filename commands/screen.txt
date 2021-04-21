@@ -1,0 +1,27 @@
+Enter Screen
+------------
+* Install screen
+* Run screen with 'screen'
+
+Horizantal Split
+-----------------
+* Ctrl + a, S (caps) for horizantal split
+* Ctrl + a, :split
+
+Vertical Split
+--------------
+* Ctrl + a, | <pipe> for horizantal split
+* Ctrl + a, :split -v
+
+Move Between Splits
+-------------------
+* Ctrl + a, Tab
+* Shift + Ctrl + a, Tab
+
+Closing Split
+-------------
+* Ctrl + a, X
+
+Resize Window
+-------------
+* Ctrl + a, :resize <xx>%
