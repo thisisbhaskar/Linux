@@ -4,4 +4,5 @@ Along with other standard ways of creating network namspace (clone, unshare), pr
 "ip netns" can be used to create/delete persistent network namespaces.
 Name spaces created with "ip netns" are stored in /var/run/netns
 
-"nsenter" can be used to execute processes in these namespaces with "nsenter --net=</var/run/netns/<name>> program args
+To execute a program in the created network namespace, use 'ip netns exec <ns-name> cmd'
+"nsenter" can also be used to execute processes in these namespaces with "nsenter --net=</var/run/netns/<name>> program args
