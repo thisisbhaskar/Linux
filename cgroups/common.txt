@@ -1,1 +1,2 @@
-TODO
+
+All the cgroups are present in /sys/fs/cgroup
