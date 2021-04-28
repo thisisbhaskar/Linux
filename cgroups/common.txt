@@ -1,6 +1,35 @@
 
 All the cgroups are present in /sys/fs/cgroup
 
+Creating a new cgroup is as simple as creating a directory with <c-group-name> in the respective cgroup parent directory.
+
+--------------------------------------------------
+root@ubuntu:/sys/fs/cgroup# dir
+blkio  cpu  cpuacct  cpu,cpuacct  cpuset  devices  freezer  hugetlb  memory  net_cls  net_cls,net_prio	net_prio  perf_event  pids  rdma  systemd  unified
+
+root@ubuntu:/sys/fs/cgroup# cd memory/
+root@ubuntu:/sys/fs/cgroup/memory# dir
+cgroup.clone_children  memory.force_empty	       memory.kmem.tcp.limit_in_bytes	   memory.memsw.failcnt		    memory.oom_control		memory.use_hierarchy
+cgroup.event_control   memory.kmem.failcnt	       memory.kmem.tcp.max_usage_in_bytes  memory.memsw.limit_in_bytes	    memory.pressure_level	notify_on_release
+cgroup.procs	       memory.kmem.limit_in_bytes      memory.kmem.tcp.usage_in_bytes	   memory.memsw.max_usage_in_bytes  memory.soft_limit_in_bytes	release_agent
+cgroup.sane_behavior   memory.kmem.max_usage_in_bytes  memory.kmem.usage_in_bytes	   memory.memsw.usage_in_bytes	    memory.stat			system.slice
+docker		       memory.kmem.slabinfo	       memory.limit_in_bytes		   memory.move_charge_at_immigrate  memory.swappiness		tasks
+memory.failcnt	       memory.kmem.tcp.failcnt	       memory.max_usage_in_bytes	   memory.numa_stat		    memory.usage_in_bytes	user.slice
+
+root@ubuntu:/sys/fs/cgroup/memory# mkdir test001
+root@ubuntu:/sys/fs/cgroup/memory# cd test001/
+root@ubuntu:/sys/fs/cgroup/memory/test001# ls
+cgroup.clone_children  memory.kmem.failcnt             memory.kmem.tcp.limit_in_bytes      memory.max_usage_in_bytes        memory.move_charge_at_immigrate  memory.stat            tasks
+cgroup.event_control   memory.kmem.limit_in_bytes      memory.kmem.tcp.max_usage_in_bytes  memory.memsw.failcnt             memory.numa_stat                 memory.swappiness
+cgroup.procs           memory.kmem.max_usage_in_bytes  memory.kmem.tcp.usage_in_bytes      memory.memsw.limit_in_bytes      memory.oom_control               memory.usage_in_bytes
+memory.failcnt         memory.kmem.slabinfo            memory.kmem.usage_in_bytes          memory.memsw.max_usage_in_bytes  memory.pressure_level            memory.use_hierarchy
+memory.force_empty     memory.kmem.tcp.failcnt         memory.limit_in_bytes               memory.memsw.usage_in_bytes      memory.soft_limit_in_bytes       notify_on_release
+--------------------------------------------------------
+
+As we can see creating a cgroup automatically creates multiple files in the directory.
+
+Assigning a cgroup to a process is as simple as adding the pid to the file 'tasks' inside the created cgroup directory.
+
 Links
 ======
 https://en.wikipedia.org/wiki/Cgroups
