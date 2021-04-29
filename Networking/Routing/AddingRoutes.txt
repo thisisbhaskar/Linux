@@ -1,0 +1,29 @@
+Adding route for local network
+===============================
+
+For all the devices on the same network, we don't need a gateway. The local system can find destination IP address MAC usign ARP and 
+release eathernet packets on the network via a particlar network interface.
+
+ip route add <destination-network/address> dev <interface-name>
+ip route add 192.168.1.0/24 dev eth0
+
+This route basically means that any device on the 192.168.1.0/24 network can be reached directly without the need of a gateway.
+Device first finds the MAC address of the destination address by using ARP protocol and then prepares eathernet frame encapsulating 
+IP packet inside it and then releases the frame on the <interface-name>
+
+Adding route for a different network
+====================================
+
+If the device needs to talk to a network which is not local, then the packets first needs to be sent to gateway.
+Gateway will then device what is the next hop based on the destination address in the IP packet.
+
+ip route add <destination-network/address> via <gateway> dev <interface-name>
+
+This syntax shows that to reach a device on the <destination-network>, the eathernet packets needs to be sent to <gateway>. 
+And it says that eathernet packets needs to be sent on the local <interface-name>.
+
+The device will first finds the MAC address of <gateway> using ARP protocol and then encapsulates the IP packet in the 
+eathernet packet, and releases on to the <interface-name>
+
+Adding default route
+====================
