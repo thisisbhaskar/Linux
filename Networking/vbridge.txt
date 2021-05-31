@@ -1,15 +1,20 @@
+Virtual Bridge is just like physical bridge, but simulated inside Linux kernel space.
+Another interesting thing is that by creating v-bridge, a virtual is cable is connected form bridge to the host machine.
+We can assign IP address to this host cable on the host machine side.
 
-brctl
-=====
+Each v-bridge can have a number of virtual cables attached to it.
+Traffic coming on any of these virtual cables will be forwared to the other ports just like physical bridge.
+
+We can create virtual eather network cables where one end is virtually connected to the bridge and other end is connected to the either host machine or to a different namespace.
+This facilitates inter namespace communications.
+
 brctl is used to create, maintain virtual ethernet bridge in linux.
-Each bridge has a number of ports attached to it. Traffic coming on any of these ports will be forwared to the other ports.
 
-brctl addbr
-brctl delbr
-brctl show
+brctl addbr <brname>
+brctl delbr <brname>
+brctl show <brname>
 brctl show <brname>
 brctl addif <brname> <ifname>
 brctl dellif <brname> <ifname>
 
-The cook thing about these bridges is that other end of the virtual eather net cable can be in different namespaces. This facilitates inter namespace communications.
 
