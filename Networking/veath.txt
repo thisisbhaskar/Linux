@@ -1,3 +1,6 @@
 veth pair a virtual eathernet cable with two ends to it. We can use 'ip link add' to create veth pair.
 
 $ sudo ip link add veth0 type veth peer name veth1
+
+After creating veth pair, 'ip link' will show two new virtual eathernet cards in the system.
+
