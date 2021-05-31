@@ -32,3 +32,52 @@ Adding other-end of veth pais to Bridge
 =======================================
 $ sudo brctl addif br0 veth1
 $ sudo brctl addif br0 veth3
+
+Assign IP-Addr to the veth pair ends in Namesspace
+===================================================
+# docker0
+$ sudo ip netns exec docker0 ip addr add 172.12.0.10/24 dev veth0
+
+# docker1
+$ sudo ip netns exec docker1 ip addr add 172.12.0.12/24 dev veth2
+
+Bring up namespace ending veth pairs
+====================================
+# docker0
+$ sudo ip netns exec docker0 ip link set veth0 up
+
+# docker1
+$ sudo ip netns exec docker1 ip link set veth2 up
+
+Bring up bridge ending veth pairs
+====================================
+$ sudo ip link set veth1 up
+$ sudo ip link set veth3 up
+
+Add interface to bridge
+=======================
+$ sudo ip addr add 172.12.0.11/24 dev br0
+$ sudo ip link set br0 up
+
+Ping from docker0 to docker1 and other way
+==========================================
+$ sudo ip netns exec docker0 ping -c 3 172.12.0.12
+PING 172.12.0.12 (172.12.0.12) 56(84) bytes of data.
+64 bytes from 172.12.0.12: icmp_seq=1 ttl=64 time=0.084 ms
+64 bytes from 172.12.0.12: icmp_seq=2 ttl=64 time=0.069 ms
+64 bytes from 172.12.0.12: icmp_seq=3 ttl=64 time=0.053 ms
+
+--- 172.12.0.12 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 1998ms
+rtt min/avg/max/mdev = 0.053/0.068/0.084/0.015 ms
+
+
+$ sudo ip netns exec docker1 ping -c 3 172.12.0.10
+PING 172.12.0.10 (172.12.0.10) 56(84) bytes of data.
+64 bytes from 172.12.0.10: icmp_seq=1 ttl=64 time=0.048 ms
+64 bytes from 172.12.0.10: icmp_seq=2 ttl=64 time=0.068 ms
+64 bytes from 172.12.0.10: icmp_seq=3 ttl=64 time=0.056 ms
+
+--- 172.12.0.10 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 1999ms
+rtt min/avg/max/mdev = 0.048/0.057/0.068/0.010 ms
