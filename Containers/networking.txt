@@ -1,1 +1,27 @@
+Create Networking Namespace
+==========================
+# Create a docker0 namespace 
+$ sudo ip netns add docker0
 
+# Create a docker1 namespace 
+$ sudo ip netns add docker1
+
+Create Veth Pair
+===============
+
+$ sudo ip link add veth0 type veth peer name veth1
+$ sudo ip link add veth2 type veth peer name veth3
+
+Adding Veth to Namespace
+========================
+
+# docker0
+$ sudo ip link set veth0 netns docker0
+# docker1
+$ sudo ip link set veth2 netns docker1
+
+Creating Bridge
+==============
+
+brctl addbr <br-name>
+brctl delbr <br-name>
