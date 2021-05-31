@@ -11,6 +11,5 @@ brctl show <brname>
 brctl addif <brname> <ifname>
 brctl dellif <brname> <ifname>
 
-ip link
-=======
+The cook thing about these bridges is that other end of the virtual eather net cable can be in different namespaces. This facilitates inter namespace communications.
 
