@@ -4,3 +4,22 @@ $ sudo ip link add veth0 type veth peer name veth1
 
 After creating veth pair, 'ip link' will show two new virtual eathernet cards in the system.
 
+root@ubuntu:/home/thisis# ip link add test1 type veth peer name test2
+root@ubuntu:/home/thisis# ip link
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:ee:3b:4b brd ff:ff:ff:ff:ff:ff
+    altname enp2s1
+3: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN mode DEFAULT group default qlen 100
+    link/none 
+4: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default 
+    link/ether 02:42:f2:c1:5c:ed brd ff:ff:ff:ff:ff:ff
+6: veth6eb5f2c@if5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP mode DEFAULT group default 
+    link/ether 0e:67:5f:ca:4f:1e brd ff:ff:ff:ff:ff:ff link-netnsid 0
+7: test2@test1: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
+    link/ether 4a:2b:2b:44:41:90 brd ff:ff:ff:ff:ff:ff
+8: test1@test2: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
+    link/ether 7a:5a:98:5d:dd:ef brd ff:ff:ff:ff:ff:ff
+
+We can assign IP addresses to these virtual eathernet ends and make them up. For all practical purposes, these will work as two eathernet cards inserted.
