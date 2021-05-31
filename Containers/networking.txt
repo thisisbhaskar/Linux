@@ -6,22 +6,29 @@ $ sudo ip netns add docker0
 # Create a docker1 namespace 
 $ sudo ip netns add docker1
 
-Create Veth Pair
-===============
+Create Veth Pairs
+=================
 
 $ sudo ip link add veth0 type veth peer name veth1
 $ sudo ip link add veth2 type veth peer name veth3
 
-Adding Veth to Namespace
-========================
+Adding one end of Veth pairs to Namespace
+=========================================
 
 # docker0
 $ sudo ip link set veth0 netns docker0
 # docker1
 $ sudo ip link set veth2 netns docker1
 
-Creating Bridge
-==============
+Creating Virtual Bridge
+=======================
 
-brctl addbr <br-name>
-brctl delbr <br-name>
+# Install brctl if you not yet install it
+$ sudo apt-get install bridge-utils
+# Create a bridge "br0"
+$ sudo brctl addbr br0
+
+Adding other-end of veth pais to Bridge
+=======================================
+$ sudo brctl addif br0 veth1
+$ sudo brctl addif br0 veth3
