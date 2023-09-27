@@ -1,3 +1,4 @@
 * To know the so files that a binary is dependent on, use ldd command
 ldd <binary_name>
-* To know the version of so file, use 
+* To know the version of so file, use ldd --version
+ldd --version <so file>
